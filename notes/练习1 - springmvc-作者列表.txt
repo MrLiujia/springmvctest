@@ -1,0 +1,29 @@
+使用springmvc实现功能【作者列表】
+
+1、配置springmvc - 在web.xml中注册servlet
+servlet类：
+  org.springframework.web.servlet.DispatcherServlet
+初始化参数：
+  contextClass：指定spring容器类(org.springframework.web.context.support.AnnotationConfigWebApplicationContext)
+  contextConfigLocation：指定配置类(自定)
+映射路径：
+  /
+
+2、配置类 AppConfig extends WebMvcConfigurerAdapter
+  @Configuration
+  @ComponentScan("自定")
+  @EnableWebMvc // 开启web mvc基础设施支持
+  重写configureViewResolvers方法，配置jsp路径的前缀和后缀
+
+3、控制器 AuthorController
+  +String list()
+    处理请求 GET /authors/author-list
+    调用AuthorService.findAll()获得数据并放入Model
+    返回字符串"author-list"
+
+4、service AuthorService
+  +List<Author> findAll()
+    返回静态List（作者1、作者2、作者3）
+
+5、jsp /WEB-INF/jsp/author-list.jsp
+  使用<c:foreach>生成<li>
