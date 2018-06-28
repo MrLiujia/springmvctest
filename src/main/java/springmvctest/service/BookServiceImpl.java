@@ -20,4 +20,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> findAll() {
 		return bookMapper.findAll();
 	}
+
+    @Override
+    public Book findOne(Long id) {
+        return bookMapper.findOne(id);
+    }
 }

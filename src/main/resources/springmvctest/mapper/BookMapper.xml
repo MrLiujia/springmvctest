@@ -32,4 +32,16 @@
       <result column="AUTHOR_GENDER" property="gender" />
     </collection>
   </resultMap>
+  
+   <select id="findOne" resultMap="bookDetails">
+     select 
+      b.ID BOOK_ID, b.TITLE BOOK_TITLE, b.DESCRIPTION BOOK_DESCRIPTION,
+      p.ID PUBLISHER_ID, p.NAME PUBLISHER_NAME, p.DESCRIPTION PUBLISHER_DESCRIPTION,
+      a.ID AUTHOR_ID, a.NAME AUTHOR_NAME, a.GENDER AUTHOR_GENDER
+     from BOOKS b 
+      inner join PUBLISHERS p on b.PUBLISHER_ID = p.ID 
+      left join BOOK_AUTHORS ba on ba.BOOK_ID = b.ID
+      inner join AUTHORS a on ba.AUTHOR_ID = a.ID
+     where b.ID = #{id}
+   </select>  
 </mapper>

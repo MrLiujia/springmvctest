@@ -6,4 +6,6 @@ import springmvctest.pojo.Book;
 
 public interface BookMapper {
     List<Book> findAll();
+
+    Book findOne(Long id);
 }
