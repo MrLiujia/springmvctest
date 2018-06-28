@@ -1,0 +1,23 @@
+实现功能【作者详情】
+
+1、控制器 AuthorController
+  +String details(@PathVariable Long id, Model model)
+    映射 GET /authors/author-details/{id}
+    调用 AuthorService.findOne(id)
+    返回 "author-details"
+
+2、service AuthorService
+  +Author findOne(Long id)
+    调用 AuthorMapper.findOne(id)
+
+3、mapper AuthorMapper
+  +Author findOne(Long id)
+
+4、mapper.xml AuthorMapper.xml
+
+5、jsp author-details.jsp
+  作者姓名、性别、简介
+  所著图书书名、简介、出版社
+
+6、jsp author-list.jsp
+  点击作者姓名（超链接）跳到其详情页
