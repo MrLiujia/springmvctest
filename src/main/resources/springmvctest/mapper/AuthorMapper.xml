@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!--    namespace对应Mapper接口名                -->
+<mapper namespace="springmvctest.mapper.AuthorMapper">
+	<select id="findOne" resultMap="authorDetails">
+		select 
+		  a.ID AUTHOR_ID, a.NAME AUTHOR_NAME, a.GENDER AUTHOR_GENDER, a.DESCRIPTION AUTHOR_DESCRIPTION,
+		  b.ID BOOK_ID, b.TITLE BOOK_TITLE, b.DESCRIPTION BOOK_DESCRIPTION,
+		  p.ID PUBLISHSER_ID, p.NAME PUBLISHER_NAME
+		from AUTHORS a 
+		  left join BOOK_AUTHORS ba on ba.AUTHOR_ID = a.ID
+		  inner join BOOKS b on ba.BOOK_ID = b.ID
+		  inner join PUBLISHERS p on b.PUBLISHER_ID = p.ID
+		where a.ID = #{id}
+	</select>
+	
+	<resultMap type="Author" id="authorDetails">
+		<id column="AUTHOR_ID" property="id"/>
+		<result column="AUTHOR_NAME" property="name"/>
+		<result column="AUTHOR_GENDER" property="gender"/>
+		<collection property="books" ofType="Book">
+			<id column="BOOK_ID" property="id"/>
+			<result column="BOOK_TITLE" property="title"/>
+			<association property="publisher" javaType="Publisher">
+				<id column="PUBLISHSER_ID" property="id"/>
+				<result column="PUBLISHER_NAME" property="name"/>
+			</association>
+		</collection>
+	</resultMap>
+	
+	<select id="findAll" resultMap="authorDetails">
+		select 
+		  a.ID AUTHOR_ID, a.NAME AUTHOR_NAME, a.GENDER AUTHOR_GENDER, a.DESCRIPTION AUTHOR_DESCRIPTION,
+		  b.ID BOOK_ID, b.TITLE BOOK_TITLE, b.DESCRIPTION BOOK_DESCRIPTION,
+		  p.ID PUBLISHSER_ID, p.NAME PUBLISHER_NAME
+		from AUTHORS a 
+		  left join BOOK_AUTHORS ba on ba.AUTHOR_ID = a.ID
+		  inner join BOOKS b on ba.BOOK_ID = b.ID
+		  inner join PUBLISHERS p on b.PUBLISHER_ID = p.ID
+	</select>
+</mapper>

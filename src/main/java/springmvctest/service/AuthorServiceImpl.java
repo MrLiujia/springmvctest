@@ -1,27 +1,26 @@
 package springmvctest.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import springmvctest.mapper.AuthorMapper;
 import springmvctest.pojo.Author;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
+	
+	private AuthorMapper authorMapper;
+	
+	@Autowired
+	public AuthorServiceImpl(AuthorMapper authorMapper) {
+		this.authorMapper = authorMapper;
+	}
 
 	@Override
 	public List<Author> findAll() {
-		List<Author> authors = new ArrayList<>();
-		
-		for (int i = 0; i < 3; i++) {
-			Author author = new Author();
-			author.setId((long) (i + 1));
-			author.setName("作者" + (i + 1));
-			authors.add(author);
-		}
-		
-		return authors;
+		return authorMapper.findAll();
 	}
 
 }
