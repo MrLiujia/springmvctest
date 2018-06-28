@@ -1,0 +1,22 @@
+使用Mybatis实现功能【图书列表】
+
+1、控制器 BookController
+  +String list()
+    调用 BookService.findAll()
+    返回 "book-list"
+
+2、service BookService
+  +List<Book> findAll()
+    调用 BookMapper.findAll()
+
+3、mapper BookMapper
+  +List<Book> findAll()
+
+4、mapper.xml BookMapper.xml
+
+5、jsp book-list.jsp
+  <table>
+    <tr><td>#1</td><td>图书1</td></tr>
+    <tr><td>#2</td><td>图书2</td></tr>
+    ...
+  </table>
