@@ -1,26 +1,23 @@
 package springmvctest.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import springmvctest.mapper.BookMapper;
 import springmvctest.pojo.Book;
 
 @Service
 public class BookServiceImpl implements BookService {
+    private BookMapper bookMapper;
+    
+    @Autowired
+	public BookServiceImpl(BookMapper bookMapper) {
+        this.bookMapper = bookMapper;
+    }
 
-	public List<Book> findAll() {
-		List<Book> books = new ArrayList<Book>();
-
-		for (int i = 0; i < 5; i++) {
-			Book book = new Book();
-			book.setId((long) (i + 1));
-			book.setTitle("book" + (i + 1));
-			books.add(book);
-		}
-		
-		return books;
+    public List<Book> findAll() {
+		return bookMapper.findAll();
 	}
-
 }
