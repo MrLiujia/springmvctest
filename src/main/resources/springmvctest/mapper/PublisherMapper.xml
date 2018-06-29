@@ -10,4 +10,8 @@
     insert into PUBLISHERS(NAME, DESCRIPTION) 
     values(#{name}, #{description})
   </insert>
+  
+  <select id="findAll" resultType="Publisher">
+    select * from PUBLISHERS
+  </select>
 </mapper>

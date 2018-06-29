@@ -1,7 +1,10 @@
 package springmvctest.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,5 +36,12 @@ public class PublisherController {
         
         publisherService.create(publisher);
         return "publisher-add";
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/publishers/publisher-list")
+    public String list(Model model) {
+        List<Publisher> publishers = publisherService.findAll();
+        model.addAttribute("publishers", publishers);
+        return "publisher-list";
     }
 }
