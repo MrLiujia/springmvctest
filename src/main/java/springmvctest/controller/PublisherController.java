@@ -2,6 +2,8 @@ package springmvctest.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +37,8 @@ public class PublisherController {
         publisher.setDescription(description);
         
         publisherService.create(publisher);
-        return "publisher-add";
+        // 重定向(302) - redirect:目标路径，注意springmvc会自动加上“协议://主机:端口/项目名”
+        return "redirect:/publishers/publisher-list";
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "/publishers/publisher-list")
