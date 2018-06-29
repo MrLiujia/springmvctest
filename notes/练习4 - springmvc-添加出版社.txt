@@ -1,0 +1,44 @@
+实现功能【添加出版社】
+
+1、控制器 PublisherController
+  +String add()
+    映射 GET /publishers/add
+    返回 "publisher-add"
+  +String create(@RequestParam String name, @RequestParam String description)
+    映射 POST /publishers/add
+    调用 PublisherService.create(publisher)
+    返回 "publisher-add"
+
+2、service PublisherService
+  +void create(Publisher publisher)
+    调用 PublisherMapper.create(publisher)
+
+3、mapper PublisherMapper
+  +void create(Publisher publisher)
+
+4、mapper.xml PublisherMapper.xml
+  <insert>
+
+5、jsp publisher-add.jsp
+  表单
+    出版社名字 <input>
+    简介       <textarea>
+
+6、web.xml
+  添加过滤器：对所有请求和响应设置UTF-8编码
+  <filter>
+  	<filter-name>characterEncodingFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>forceEncoding</param-name>
+  		<param-value>true</param-value>
+  	</init-param>  	
+  </filter>
+  <filter-mapping>
+  	<filter-name>characterEncodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
