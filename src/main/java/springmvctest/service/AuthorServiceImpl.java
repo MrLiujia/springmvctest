@@ -23,4 +23,9 @@ public class AuthorServiceImpl implements AuthorService {
 		return authorMapper.findAll();
 	}
 
+    @Override
+    public Author findOne(Long id) {
+        return authorMapper.findOne(id);
+    }
+
 }

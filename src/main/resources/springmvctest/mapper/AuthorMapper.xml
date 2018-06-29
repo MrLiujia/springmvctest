@@ -22,6 +22,7 @@
 		<id column="AUTHOR_ID" property="id"/>
 		<result column="AUTHOR_NAME" property="name"/>
 		<result column="AUTHOR_GENDER" property="gender"/>
+        <result column="AUTHOR_DESCRIPTION" property="description"/>
 		<collection property="books" ofType="Book">
 			<id column="BOOK_ID" property="id"/>
 			<result column="BOOK_TITLE" property="title"/>
