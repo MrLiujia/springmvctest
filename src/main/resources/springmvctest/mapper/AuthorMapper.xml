@@ -40,7 +40,12 @@
 		  p.ID PUBLISHSER_ID, p.NAME PUBLISHER_NAME
 		from AUTHORS a 
 		  left join BOOK_AUTHORS ba on ba.AUTHOR_ID = a.ID
-		  inner join BOOKS b on ba.BOOK_ID = b.ID
-		  inner join PUBLISHERS p on b.PUBLISHER_ID = p.ID
+		  left join BOOKS b on ba.BOOK_ID = b.ID
+		  left join PUBLISHERS p on b.PUBLISHER_ID = p.ID
 	</select>
+  
+    <insert id="create">
+      insert into AUTHORS(NAME, GENDER, DESCRIPTION)
+      values(#{name}, #{gender}, #{description})
+    </insert>
 </mapper>

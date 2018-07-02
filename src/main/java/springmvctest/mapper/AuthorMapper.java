@@ -8,4 +8,6 @@ public interface AuthorMapper {
 	Author findOne(Long id);
 	
 	List<Author> findAll();
+
+    void create(Author author);
 }

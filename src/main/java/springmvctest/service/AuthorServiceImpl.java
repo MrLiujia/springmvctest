@@ -28,4 +28,9 @@ public class AuthorServiceImpl implements AuthorService {
         return authorMapper.findOne(id);
     }
 
+    @Override
+    public void create(Author author) {
+        authorMapper.create(author);
+    }
+
 }

@@ -35,4 +35,15 @@ public class AuthorController {
 	    model.addAttribute("author", author);
 	    return "author-details";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/authors/add")
+	public String add() {
+	    return "author-add";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/authors/add")
+    public String create(Author author) {
+        authorService.create(author);
+        return "redirect:/authors/author-list";
+    }
 }

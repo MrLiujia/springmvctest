@@ -10,4 +10,6 @@ public interface AuthorService {
 
     Author findOne(Long id);
 
+    void create(Author author);
+
 }
