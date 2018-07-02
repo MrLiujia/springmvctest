@@ -1,0 +1,26 @@
+实现功能【添加作者】
+
+1、控制器 AuthorController
+  +String add()
+    映射 GET /authors/add
+    返回 "author-add"
+  +String create(Author author)
+    映射 POST /authors/add
+    调用 AuthorService.create(author)
+    重定向到【作者列表】
+
+2、service AuthorService
+  +void create(Author author)
+    调用 AuthorMapper.create(author)
+
+3、mapper AuthorMapper
+  +void create(Author author)
+
+4、mapper.xml AuthorMapper.xml
+  <insert>
+
+5、jsp author-add.jsp
+  表单
+    姓名    <input>
+    性别    <input type="radio">
+    简介    <textarea>
