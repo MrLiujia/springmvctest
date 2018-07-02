@@ -19,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @ComponentScan("springmvctest")
-@EnableWebMvc // 开启web mvc基础设施支持
+@EnableWebMvc // 开启web mvc基础设施支持（如JSR-303校验支持）
 @MapperScan("springmvctest.mapper") // 扫描指定包下的mapper
 @PropertySource("classpath:jdbc.properties")
 public class AppConfig extends WebMvcConfigurerAdapter {

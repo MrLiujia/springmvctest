@@ -2,10 +2,20 @@ package springmvctest.pojo;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+
 public class Author {
 	private Long id;
+	
+	@Size(min = 2, max = 512, message = "2~512字")
 	private String name;
+
+	@NotNull(message = "必填")
 	private Gender gender;
+
+	@Size(max = 1024, message = "最多1024字")
 	private String description;
 	
 	// 对多关系
