@@ -1,0 +1,20 @@
+实现功能【添加出版社时校验表单】
+
+1、控制器 PublisherController
+  +String add(Model model)
+    映射 GET /publishers/add
+    将空publisher放入model
+    返回 "publisher-add"
+  +String create(@Valid Publisher publisher, BindingResult bindingResult, Model model)
+    映射 POST /publishers/add
+    如果有校验错误
+      将publisher放入model
+      返回 "publisher-add"
+    否则
+      调用 PublisherService.create(publisher)
+      重定向到【出版社列表】
+    
+5、jsp publisher-add.jsp
+  表单
+    名字       <form:input path>    <form:errors path cssClass>
+    简介       <form:textarea path> <form:errors path cssClass>
