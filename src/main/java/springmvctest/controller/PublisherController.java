@@ -30,12 +30,9 @@ public class PublisherController {
     }
     
     @RequestMapping(method = RequestMethod.POST, value = "/publishers/add")
-    public String create(@RequestParam String name,
-                         @RequestParam String description) {
-        Publisher publisher = new Publisher();
-        publisher.setName(name);
-        publisher.setDescription(description);
-        
+    //                   把表单字段封装成表单bean（new Publisher, setName, setDescription）
+    //                   注意：表单字段名要同pojo属性名，没有字段对应属性将是默认值，不识别的字段将被忽略
+    public String create(Publisher publisher) {
         publisherService.create(publisher);
         // 重定向(302) - redirect:目标路径，注意springmvc会自动加上“协议://主机:端口/项目名”
         return "redirect:/publishers/publisher-list";
