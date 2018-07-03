@@ -42,7 +42,7 @@ public class AuthorController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/authors/add")
 	public String add(@ModelAttribute Author author) {
-	    return "author-add";
+	    return "author-edit";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/authors/add")
@@ -51,11 +51,29 @@ public class AuthorController {
     public String create(@ModelAttribute @Valid Author author, 
                          BindingResult bindingResult) {
 	    if (bindingResult.hasErrors()) {
-	        return "author-add";
+	        return "author-edit";
 	    }
 	    
 	    // 数据校验通过才能走service
         authorService.create(author);
+        return "redirect:/authors/author-list";
+    }
+	
+    @RequestMapping(method = RequestMethod.GET, value = "/authors/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        Author author = authorService.findOne(id);
+        model.addAttribute("author", author);
+        return "author-edit";
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, value = "/authors/{id}/edit")
+    public String update(@ModelAttribute @Valid Author author,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "author-edit";
+        }
+        
+        authorService.update(author);
         return "redirect:/authors/author-list";
     }
 }

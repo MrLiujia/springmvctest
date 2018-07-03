@@ -10,4 +10,6 @@ public interface AuthorMapper {
 	List<Author> findAll();
 
     void create(Author author);
+
+    void update(Author author);
 }

@@ -12,4 +12,6 @@ public interface AuthorService {
 
     void create(Author author);
 
+    void update(Author author);
+
 }

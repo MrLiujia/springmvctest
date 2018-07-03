@@ -18,6 +18,7 @@
 			<li>
               #${author.id} 
               <a href="${contextPath}/authors/author-details/${author.id}">${author.name}</a>
+              <a href="${contextPath}/authors/${author.id}/edit">修改</a>
             </li>
 		</c:forEach>
 	</ul>

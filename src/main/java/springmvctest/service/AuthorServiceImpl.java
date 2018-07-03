@@ -33,4 +33,9 @@ public class AuthorServiceImpl implements AuthorService {
         authorMapper.create(author);
     }
 
+    @Override
+    public void update(Author author) {
+        authorMapper.update(author);
+    }
+
 }
