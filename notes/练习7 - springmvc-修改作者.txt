@@ -1,0 +1,32 @@
+实现功能【修改作者】
+
+1、控制器 AuthorController
+  +String edit(@PathVariable Long id, Model model)
+    映射 GET /authors/{id}/edit
+    调用 AuthorService.findOne(id)，结果放入model
+    返回 "author-edit"
+  +String update(@ModelAttribute @Valid Author author, BindingResult bindingResult)
+    映射 POST /authors/{id}/edit
+    如果有校验错误
+      返回 "author-edit"
+    否则
+      调用 AuthorService.update(author)
+      重定向到【作者列表】
+
+2、service AuthorService
+  +Author findOne(Long id)
+    调用 AuthorMapper.findOne(id)
+  +void update(Author author)
+    调用 AuthorMapper.update(author)
+
+3、mapper AuthorMapper
+  +Author findOne(Long id)
+  +void update(Author author)
+
+4、mapper.xml AuthorMapper.xml
+  <select>
+  <update>
+
+5、jsp 重命名 author-add.jsp -> author-edit.jsp
+  根据表单bean的id是否为null显示标题“添加作者” OR “修改作者”
+
