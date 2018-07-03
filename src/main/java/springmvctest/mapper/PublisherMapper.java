@@ -9,4 +9,8 @@ public interface PublisherMapper {
     void create(Publisher publisher);
 
     List<Publisher> findAll();
+
+    Publisher findOne(Long id);
+
+    void update(Publisher publisher);
 }

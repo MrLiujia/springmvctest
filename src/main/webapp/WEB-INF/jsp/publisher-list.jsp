@@ -15,7 +15,10 @@
   <h1>出版社列表</h1>
   <ul>
     <c:forEach items="${publishers}" var="publisher">
-      <li>#${publisher.id} ${publisher.name}</li>
+      <li>
+        #${publisher.id} ${publisher.name} 
+        <a href="${contextPath}/publishers/${publisher.id}/edit">编辑</a>
+      </li>
     </c:forEach>
   </ul>
 </body>

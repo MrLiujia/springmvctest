@@ -14,4 +14,37 @@
   <select id="findAll" resultType="Publisher">
     select * from PUBLISHERS
   </select>
+
+  <select id="findOne" resultMap="publisherDetails">
+    select 
+      p.ID PUBLISHER_ID, p.NAME PUBLISHER_NAME, p.DESCRIPTION PUBLISHER_DESCRIPTION,
+      b.ID BOOK_ID, b.TITLE BOOK_TITLE,
+      a.ID AUTHOR_ID, a.NAME AUTHOR_NAME
+    from PUBLISHERS p 
+      left join BOOKS b on b.PUBLISHER_ID = p.ID
+      left join BOOK_AUTHORS ba on ba.BOOK_ID = b.ID
+      left join AUTHORS a on ba.AUTHOR_ID = a.ID
+    where p.ID = #{id}  
+  </select>
+  
+<!--  注意：id或者result元素的property指定的属性应该属于父元素的ofType、type、javaType指定的pojo类 -->
+  <resultMap type="Publisher" id="publisherDetails">
+    <id column="PUBLISHER_ID" property="id"/>
+    <result column="PUBLISHER_NAME" property="name"/>
+    <result column="PUBLISHER_DESCRIPTION" property="description"/>
+    <collection property="books" ofType="Book">
+      <id column="BOOK_ID" property="id"></id>
+      <result column="BOOK_TITLE" property="title"/>
+      <collection property="authors" ofType="Author">
+        <id column="AUTHOR_ID" property="id"/>
+        <result column="AUTHOR_NAME" property="name"/>
+      </collection>
+    </collection>
+  </resultMap>  
+  
+  <update id="update">
+    update PUBLISHERS 
+    set NAME = #{name}, DESCRIPTION = #{description}
+    where ID = #{id}
+  </update>
 </mapper>

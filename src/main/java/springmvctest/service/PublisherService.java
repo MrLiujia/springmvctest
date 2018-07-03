@@ -10,4 +10,7 @@ public interface PublisherService {
 
     List<Publisher> findAll();
 
+    Publisher findOne(Long id);
+
+    void update(Publisher publisher);
 }

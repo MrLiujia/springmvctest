@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,7 +28,7 @@ public class PublisherController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/publishers/add")
     public String add(@ModelAttribute Publisher publisher) {
-        return "publisher-add";
+        return "publisher-edit";
     }
     
     @RequestMapping(method = RequestMethod.POST, value = "/publishers/add")
@@ -36,7 +37,7 @@ public class PublisherController {
     public String create(@ModelAttribute @Valid Publisher publisher, 
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "publisher-add";
+            return "publisher-edit";
         }
         publisherService.create(publisher);
         // 重定向(302) - redirect:目标路径，注意springmvc会自动加上“协议://主机:端口/项目名”
@@ -48,5 +49,22 @@ public class PublisherController {
         List<Publisher> publishers = publisherService.findAll();
         model.addAttribute("publishers", publishers);
         return "publisher-list";
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/publishers/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        Publisher publisher = publisherService.findOne(id);
+        model.addAttribute("publisher", publisher);
+        return "publisher-edit";
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, value = "/publishers/{id}/edit")
+    public String update(@ModelAttribute @Valid Publisher publisher, 
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "publisher-edit";
+        }
+        publisherService.update(publisher);
+        return "redirect:/publishers/publisher-list";
     }
 }

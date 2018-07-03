@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+
+<c:set var="title" value="${publisher.id == null ? '添加出版社' : '修改出版社'}"></c:set>
+   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加出版社</title>
+<title>${title}</title>
   <style type="text/css">
    .field-error {
      color: red;
@@ -14,7 +18,7 @@
   </style>  
 </head>
 <body>
-  <h1>添加出版社</h1>
+  <h1>${title}</h1>
   <form:form action="" method="post" commandName="publisher">
     <div>
       <label for="name">名字</label>

@@ -28,4 +28,14 @@ public class PublisherServiceImpl implements PublisherService {
         return publisherMapper.findAll();
     }
 
+    @Override
+    public Publisher findOne(Long id) {
+        return publisherMapper.findOne(id);
+    }
+
+    @Override
+    public void update(Publisher publisher) {
+        publisherMapper.update(publisher);
+    }
+
 }
