@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,17 +41,16 @@ public class AuthorController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/authors/add")
-	public String add(Model model) {
-	    model.addAttribute("author", new Author());
+	public String add(@ModelAttribute Author author) {
 	    return "author-add";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/authors/add")
-	//                   @Valid告诉springmvc需要校验Author
-	//                                         BindingResult参数必须紧随@Valid参数；如果省略了bindingResult参数，springmvc将直接返回400（Bad request）
-    public String create(@Valid Author author, BindingResult bindingResult, Model model) {
+	//                                   @Valid告诉springmvc需要校验Author
+	//                   BindingResult参数必须紧随@Valid参数；如果省略了bindingResult参数，springmvc将直接返回400（Bad request）
+    public String create(@ModelAttribute @Valid Author author, 
+                         BindingResult bindingResult) {
 	    if (bindingResult.hasErrors()) {
-	        model.addAttribute("author", author);
 	        return "author-add";
 	    }
 	    
