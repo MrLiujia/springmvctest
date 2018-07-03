@@ -7,4 +7,5 @@ public interface OperatorMapper {
     void create(@Param("username") String username,
                 @Param("password") String encodedPassword);
 
+    Boolean usernameExists(String username);
 }

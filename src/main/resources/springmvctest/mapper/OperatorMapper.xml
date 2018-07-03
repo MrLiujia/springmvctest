@@ -10,4 +10,8 @@
     insert into OPERATORS(USERNAME, PASSWORD) 
     values(#{username}, #{password})
   </insert>
+  
+  <select id="usernameExists" resultType="boolean">
+    select count(*) > 0 from OPERATORS where USERNAME = #{username}
+  </select>
 </mapper>

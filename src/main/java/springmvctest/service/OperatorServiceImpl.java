@@ -25,4 +25,9 @@ public class OperatorServiceImpl implements OperatorService {
         operatorMapper.create(username, encodedPassword);
     }
 
+    @Override
+    public boolean usernameExists(String username) {
+        return operatorMapper.usernameExists(username);
+    }
+
 }

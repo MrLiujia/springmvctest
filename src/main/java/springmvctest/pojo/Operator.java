@@ -1,9 +1,16 @@
 package springmvctest.pojo;
 
+import javax.validation.constraints.Size;
+
 public class Operator {
 	private Integer id;
+	
+	@Size(min = 2, max = 64, message = "2~64字符")
 	private String username;
+	
+	@Size(min = 6, max = 32, message = "6~32位")
 	private String password;
+	
 	private String role;
 	private Boolean disabled;
 
