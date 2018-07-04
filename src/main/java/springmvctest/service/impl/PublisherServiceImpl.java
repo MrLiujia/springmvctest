@@ -41,4 +41,9 @@ public class PublisherServiceImpl implements PublisherService {
         publisherMapper.update(publisher);
     }
 
+    @Override
+    public List<Publisher> findAllOptions() {
+        return publisherMapper.findAllOptions();
+    }
+
 }

@@ -12,4 +12,6 @@ public interface AuthorMapper {
     void create(Author author);
 
     void update(Author author);
+
+    List<Author> findAllOptions();
 }

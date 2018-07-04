@@ -14,4 +14,6 @@ public interface AuthorService {
 
     void update(Author author);
 
+    List<Author> findAllOptions();
+
 }

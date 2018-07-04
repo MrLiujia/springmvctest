@@ -41,4 +41,9 @@ public class AuthorServiceImpl implements AuthorService {
         authorMapper.update(author);
     }
 
+    @Override
+    public List<Author> findAllOptions() {
+        return authorMapper.findAllOptions();
+    }
+
 }

@@ -2,9 +2,15 @@ package springmvctest.pojo;
 
 import java.util.List;
 
+import javax.validation.constraints.Size;
+
 public class Book {
 	private Long id;
+	
+	@Size(min = 1, max = 512, message = "1~512字")
 	private String title;
+	
+	@Size(max = 1024, message = "最多1024字")
 	private String description;
 	
 	// 对一关系

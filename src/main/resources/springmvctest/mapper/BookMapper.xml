@@ -44,4 +44,14 @@
       inner join AUTHORS a on ba.AUTHOR_ID = a.ID
      where b.ID = #{id}
    </select>  
+   
+   <insert id="create" useGeneratedKeys="true" keyColumn="ID" keyProperty="id">
+     insert into BOOKS(TITLE, DESCRIPTION, PUBLISHER_ID) 
+     values(#{title}, #{description}, #{publisher.id})
+   </insert>
+   
+   <insert id="addAuthor">
+     insert into BOOK_AUTHORS(BOOK_ID, AUTHOR_ID) 
+     values(#{bookId}, #{authorId})
+   </insert>
 </mapper>

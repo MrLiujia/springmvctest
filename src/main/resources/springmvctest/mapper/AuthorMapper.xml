@@ -54,4 +54,8 @@
       set NAME = #{name}, GENDER = #{gender}, DESCRIPTION = #{description}
       where ID = #{id}
     </update>
+    
+    <select id="findAllOptions" resultType="Author">
+      select ID, NAME from AUTHORS
+    </select>
 </mapper>

@@ -13,4 +13,6 @@ public interface PublisherService {
     Publisher findOne(Long id);
 
     void update(Publisher publisher);
+
+    List<Publisher> findAllOptions();
 }

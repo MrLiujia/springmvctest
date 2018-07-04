@@ -10,4 +10,5 @@ public interface BookService {
 
     Book findOne(Long id);
 
+    void create(Book book);
 }

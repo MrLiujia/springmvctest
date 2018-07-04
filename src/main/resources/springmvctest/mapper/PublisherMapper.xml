@@ -47,4 +47,8 @@
     set NAME = #{name}, DESCRIPTION = #{description}
     where ID = #{id}
   </update>
+  
+  <select id="findAllOptions" resultType="Publisher">
+    select ID, NAME from PUBLISHERS
+  </select>
 </mapper>
