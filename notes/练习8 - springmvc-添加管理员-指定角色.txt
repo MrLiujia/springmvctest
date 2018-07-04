@@ -1,0 +1,40 @@
+实现功能【添加管理员、下拉框选择角色】
+
+控制器 OperatorController
+  +String add(@ModelAttribute Operator operator,
+              Model model)
+    映射 GET /operators/add
+    调用 RoleService.findAllOptions()，结果放入model
+    返回 "operator-add"
+  +String create(@ModelAttribute @Valid Operator operator, 
+                 BindingResult bindingResult,
+                 Model model)
+    映射 POST /operators/add
+	如果未指定角色，手动添加校验错误
+    如果有校验错误
+      调用 RoleService.findAllOptions()，结果放入model
+      返回 "operator-add"
+    否则
+      调用 OperatorService.create(operator)
+      重定向到【管理员列表】
+
+service OperatorService
+  +void create(Operator operator)
+    调用 OperatorMapper.create(operator)
+mapper OperatorMapper
+  +void create(Operator operator)
+mapper.xml OperatorMapper.xml
+  <insert>
+
+service RoleService
+  +List<Role> findAllOptions()
+    调用 RoleMapper.findAllOptions()
+mapper RoleMapper
+  +List<Role> findAllOptions()
+mapper.xml RoleMapper.xml
+  <select>
+
+jsp operator-add.jsp 
+  用户名    <form:input path>
+  密码      <form:password path>
+  角色      <form:select path>
