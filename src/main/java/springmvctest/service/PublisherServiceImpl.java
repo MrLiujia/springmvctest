@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import springmvctest.mapper.PublisherMapper;
 import springmvctest.pojo.Publisher;
 
 @Service
+@Transactional
 public class PublisherServiceImpl implements PublisherService {
    
     private PublisherMapper publisherMapper;

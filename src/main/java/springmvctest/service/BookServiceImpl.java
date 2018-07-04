@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import springmvctest.mapper.BookMapper;
 import springmvctest.pojo.Book;
 
 @Service
+@Transactional
 public class BookServiceImpl implements BookService {
     private BookMapper bookMapper;
     
