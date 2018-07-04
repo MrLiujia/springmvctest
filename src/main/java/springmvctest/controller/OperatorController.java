@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import springmvctest.pojo.Operator;
 import springmvctest.service.OperatorService;
+import springmvctest.service.UsernameExistsException;
 
 @Controller
 public class OperatorController {
@@ -35,16 +36,19 @@ public class OperatorController {
            return "operator-add";
         }
         
-        if (operatorService.usernameExists(operator.getUsername())) {
-           bindingResult.rejectValue( // 手动添加校验错误
-                   "username", // 指定错误字段
-                   "form.operatorAdd.usernameExists", // 错误码, i18n（国际化）
-                   "用户名已占用" // 如果错误码对应的消息没有找到，则使用此默认消息
-                   );
-           return "operator-add";
+        // 牢记：控制层只处理参数收集、数据校验之类的，至于处理业务的细节、步骤应该放在service层
+        try {
+            operatorService.create(operator.getUsername(), operator.getPassword());
+        } catch (UsernameExistsException ex) {
+            System.out.println(ex.getMessage());
+            bindingResult.rejectValue( // 手动添加校验错误
+                    "username", // 指定错误字段
+                    "form.operatorAdd.usernameExists", // 错误码, i18n（国际化）
+                    "用户名已占用" // 如果错误码对应的消息没有找到，则使用此默认消息
+            );
+            return "operator-add";
         }
         
-        operatorService.create(operator.getUsername(), operator.getPassword());
         return "redirect:/operators/";
     }
 }

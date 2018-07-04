@@ -21,13 +21,12 @@ public class OperatorServiceImpl implements OperatorService {
 
     @Override
     public void create(String username, String password) {
+        if (operatorMapper.usernameExists(username)) {
+          throw new UsernameExistsException();
+        }
+        
         String encodedPassword = passwordEncoder.encode(password);
         operatorMapper.create(username, encodedPassword);
-    }
-
-    @Override
-    public boolean usernameExists(String username) {
-        return operatorMapper.usernameExists(username);
     }
 
 }
