@@ -1,4 +1,4 @@
-package springmvctest.service;
+package springmvctest.service.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import springmvctest.mapper.BookMapper;
 import springmvctest.pojo.Book;
+import springmvctest.service.BookService;
 
 @Service
 @Transactional
