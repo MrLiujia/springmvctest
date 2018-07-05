@@ -1,11 +1,10 @@
 package springmvctest.mapper;
 
-import org.apache.ibatis.annotations.Param;
+import springmvctest.pojo.Operator;
 
 public interface OperatorMapper {
 
-    void create(@Param("username") String username,
-                @Param("password") String encodedPassword);
+    void create(Operator operator);
 
     Boolean usernameExists(String username);
 }

@@ -1,7 +1,9 @@
 package springmvctest.service;
 
+import springmvctest.pojo.Operator;
+
 public interface OperatorService {
 
-    void create(String username, String password);
+    void create(Operator operator);
 
 }

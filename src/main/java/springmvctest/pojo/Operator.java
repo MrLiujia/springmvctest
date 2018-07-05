@@ -11,7 +11,8 @@ public class Operator {
 	@Size(min = 6, max = 32, message = "6~32位")
 	private String password;
 	
-	private String role;
+	private Role role; // 对一关系
+	
 	private Boolean disabled;
 
 	public Operator() {
@@ -41,15 +42,15 @@ public class Operator {
 		this.password = password;
 	}
 
-	public String getRole() {
-		return role;
-	}
+	public Role getRole() {
+        return role;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
-	public Boolean getDisabled() {
+    public Boolean getDisabled() {
 		return disabled;
 	}
 

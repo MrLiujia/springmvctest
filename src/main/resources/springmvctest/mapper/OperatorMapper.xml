@@ -7,8 +7,8 @@
 <!--    namespace对应Mapper接口名                -->
 <mapper namespace="springmvctest.mapper.OperatorMapper">
   <insert id="create">
-    insert into OPERATORS(USERNAME, PASSWORD) 
-    values(#{username}, #{password})
+    insert into OPERATORS(USERNAME, PASSWORD, ROLE_ID) 
+    values(#{username}, #{password}, #{role.id})
   </insert>
   
   <select id="usernameExists" resultType="boolean">

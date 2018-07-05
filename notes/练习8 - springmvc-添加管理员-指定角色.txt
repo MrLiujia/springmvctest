@@ -38,3 +38,21 @@ jsp operator-add.jsp
   用户名    <form:input path>
   密码      <form:password path>
   角色      <form:select path>
+
+-------------------------------------------------------------
+
+create table ROLES(
+  ID identity,
+  NAME varchar(64) not null,
+  DESCRIPTION varchar(128)
+);
+
+alter table OPERATORS add column ROLE_ID bigint;
+alter table OPERATORS drop column ROLE;
+
+-- 添加外键约束 OPERATORS_FK_ROLE_ID_ROLES
+-- 添加not null约束 OPERATORS.ROLE_ID
+
+insert into ROLES(NAME) values
+  ('图书管理员'),
+  ('管理参观者');

@@ -30,6 +30,14 @@
       <form:input type="password" path="password" id="password" />
       <form:errors path="password" cssClass="field-error" />
     </div>
+    <div>
+      <label for="roleId">角色</label>
+      <form:select path="role.id" id="roleId"
+                   items="${roleOptions}" 
+                   itemLabel="name"
+                   itemValue="id" />
+      <form:errors path="role.id" cssClass="field-error" />
+    </div>    
     <div> 
       <button type="submit">添加</button>
     </div>

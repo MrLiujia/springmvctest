@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import springmvctest.mapper.OperatorMapper;
+import springmvctest.pojo.Operator;
 import springmvctest.service.OperatorService;
 import springmvctest.service.UsernameExistsException;
 
@@ -24,13 +25,15 @@ public class OperatorServiceImpl implements OperatorService {
     }
 
     @Override
-    public void create(String username, String password) {
-        if (operatorMapper.usernameExists(username)) {
+    public void create(Operator operator) {
+        if (operatorMapper.usernameExists(operator.getUsername())) {
           throw new UsernameExistsException();
         }
         
-        String encodedPassword = passwordEncoder.encode(password);
-        operatorMapper.create(username, encodedPassword);
+        String encodedPassword = passwordEncoder.encode(operator.getPassword());
+        operator.setPassword(encodedPassword);
+        
+        operatorMapper.create(operator);
     }
 
 }
