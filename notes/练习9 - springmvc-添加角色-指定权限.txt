@@ -1,0 +1,49 @@
+实现功能【添加角色、多选下拉框指定权限】
+
+表单接收类 RoleForm
+  -name: String                    1~64字
+  -description: String             选填
+  -permissionIds: List<String>     选填
+  +getter/setters
+  +Role toRole()
+
+控制器 RoleController
+  +String add(@ModelAttribute RoleForm roleForm,
+              Model model)
+    映射 GET /roles/add
+    调用 PermissionService.findAllOptions()，结果放入model
+    返回 "role-add"
+  +String create(@ModelAttribute @Valid RoleForm roleForm, 
+                 BindingResult bindingResult,
+                 Model model)
+    映射 POST /roles/add
+    如果有校验错误
+      调用 PermissionService.findAllOptions()，结果放入model
+      返回 "role-add"
+    否则
+      调用 RoleService.create(roleForm.toRole())
+      重定向到【角色列表】
+
+service RoleService
+  +void create(Role role)
+    调用 RoleMapper.create(role)
+mapper RoleMapper
+  +void create(Role role)
+mapper.xml RoleMapper.xml
+  <insert>
+
+service PermissionService
+  +List<Permission> findAllOptions()
+    调用 PermissionMapper.findAllOptions()
+mapper PermissionMapper
+  +List<Permission> findAllOptions()
+mapper.xml PermissionMapper.xml
+  <select>
+    select ID, NAME from ...
+
+jsp role-add.jsp 
+  角色名    <form:input path>
+  描述      <form:textarea path>
+  权限      <form:select path>
+
+-------------------------------------------------------------
