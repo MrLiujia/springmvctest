@@ -65,15 +65,6 @@ public class BookController {
     private void prepareOptionsInAdd(Model model) {
         List<Author> authorOptions = authorService.findAllOptions();
 	    List<Publisher> publisherOptions = publisherService.findAllOptions();
-	    
-	    Author authorPlaceholder = new Author();
-	    authorPlaceholder.setName("--请选择作者--");
-	    authorOptions.add(0, authorPlaceholder);
-	    
-	    Publisher publisherPlaceholder = new Publisher();
-	    publisherPlaceholder.setName("--请选择出版社--");
-	    publisherOptions.add(0, publisherPlaceholder);
-	    
 	    model.addAttribute("authorOptions", authorOptions);
 	    model.addAttribute("publisherOptions", publisherOptions);
     }
@@ -88,8 +79,9 @@ public class BookController {
 	    }
 	    
 	    System.out.println("book add: " + bookForm.getTitle());
-//	    System.out.println("authors: " + bookForm.getAuthors().size() + "个");
+	    System.out.println("authors: " + bookForm.getAuthorIds().size() + "个");
 	    System.out.println("publisher: #" + bookForm.getPublisherId());
+	    
 	    bookService.create(bookForm.toBook());
 	    return "redirect:/books/book-list";
 	}

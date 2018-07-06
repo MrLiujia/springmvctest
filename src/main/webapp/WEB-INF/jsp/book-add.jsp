@@ -29,36 +29,26 @@
       <form:errors path="description" cssClass="field-error" />
     </div>   
     
-<!--     <div> -->
-<!--       <label for="authorId">作者</label> -->
-<!-- <!--       items指定用于生成选项的pojo列表 --> -->
-<!-- <!--       itemLabel指定作为option的显示文本的pojo属性 --> -->
-<!-- <!--       itemValue指定作为option的提交值的pojo属性 --> -->
-<%--       <form:select path="authors[0].id" id="authorId"  --%>
-<%--                    items="${authorOptions}"  --%>
-<%--                    itemLabel="name"  --%>
-<%--                    itemValue="id"> --%>
-<%--       </form:select> --%>
-      
-<%--       <form:select path="authors[1].id" --%>
-<%--                    items="${authorOptions}"  --%>
-<%--                    itemLabel="name"  --%>
-<%--                    itemValue="id"> --%>
-<%--       </form:select> --%>
-
-<%--       <form:select path="authors[2].id"  --%>
-<%--                    items="${authorOptions}"  --%>
-<%--                    itemLabel="name"  --%>
-<%--                    itemValue="id"> --%>
-<%--       </form:select> --%>
-<!--     </div>  -->
-
+    <div>
+      <label for="authorIds">作者</label>
+<!--       items指定用于生成选项的pojo列表 -->
+<!--       itemLabel指定作为option的显示文本的pojo属性 -->
+<!--       itemValue指定作为option的提交值的pojo属性 -->
+      <form:select path="authorIds" id="authorIds"> 
+        <form:option value="" label="--请选择作者--" />  
+        <form:options items="${authorOptions}" 
+                      itemLabel="name" 
+                      itemValue="id" /> 
+      </form:select>
+      <form:errors path="authorIds" cssClass="field-error" />
+    </div> 
     <div>
       <label for="publisherId">出版社</label>
-      <form:select path="publisherId" id="publisherId"
-                   items="${publisherOptions}"
-                   itemLabel="name"
-                   itemValue="id">
+      <form:select path="publisherId" id="publisherId">
+        <form:option value="" label="--请选择出版社--" />
+        <form:options items="${publisherOptions}" 
+                      itemLabel="name" 
+                      itemValue="id" />                                 
       </form:select>
       <form:errors path="publisherId" cssClass="field-error" />
     </div>   
