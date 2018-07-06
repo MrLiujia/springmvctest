@@ -13,7 +13,7 @@
      from BOOKS b 
       inner join PUBLISHERS p on b.PUBLISHER_ID = p.ID 
       left join BOOK_AUTHORS ba on ba.BOOK_ID = b.ID
-      inner join AUTHORS a on ba.AUTHOR_ID = a.ID
+      left join AUTHORS a on ba.AUTHOR_ID = a.ID
    </select>
 
   <resultMap type="Book" id="bookDetails">
@@ -41,7 +41,7 @@
      from BOOKS b 
       inner join PUBLISHERS p on b.PUBLISHER_ID = p.ID 
       left join BOOK_AUTHORS ba on ba.BOOK_ID = b.ID
-      inner join AUTHORS a on ba.AUTHOR_ID = a.ID
+      left join AUTHORS a on ba.AUTHOR_ID = a.ID
      where b.ID = #{id}
    </select>  
    

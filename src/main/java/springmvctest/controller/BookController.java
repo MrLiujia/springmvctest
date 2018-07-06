@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import springmvctest.controller.form.BookForm;
 import springmvctest.pojo.Author;
 import springmvctest.pojo.Book;
 import springmvctest.pojo.Publisher;
@@ -56,7 +57,7 @@ public class BookController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/books/add")
 	// 注意：@ModelAttribute会用参数类名首字母小写作为model名，而不是同参数名
-	public String add(@ModelAttribute Book book, Model model) {
+	public String add(@ModelAttribute BookForm bookForm, Model model) {
 	    prepareOptionsInAdd(model);
 	    return "book-add";
 	}
@@ -78,22 +79,18 @@ public class BookController {
     }
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/books/add")
-	public String create(@ModelAttribute @Valid Book book,
+	public String create(@ModelAttribute @Valid BookForm bookForm,
 	                     BindingResult bindingResult, 
 	                     Model model) {
-        if (book.getPublisher() == null || book.getPublisher().getId() == null) {
-            bindingResult.rejectValue("publisher.id", "required", "必填");
-        }
-        
 	    if (bindingResult.hasErrors()) {
 	        prepareOptionsInAdd(model);
 	        return "book-add";
 	    }
 	    
-	    System.out.println("book add: " + book.getTitle());
-	    System.out.println("authors: " + book.getAuthors().size() + "个");
-	    System.out.println("publisher: #" + book.getPublisher().getId());
-	    bookService.create(book);
+	    System.out.println("book add: " + bookForm.getTitle());
+//	    System.out.println("authors: " + bookForm.getAuthors().size() + "个");
+	    System.out.println("publisher: #" + bookForm.getPublisherId());
+	    bookService.create(bookForm.toBook());
 	    return "redirect:/books/book-list";
 	}
 }

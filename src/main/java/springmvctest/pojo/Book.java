@@ -1,23 +1,21 @@
 package springmvctest.pojo;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 public class Book {
 	private Long id;
-	
-	@Size(min = 1, max = 512, message = "1~512字")
 	private String title;
-	
-	@Size(max = 1024, message = "最多1024字")
 	private String description;
 	
 	// 对一关系
+	@NotNull
 	private Publisher publisher;
 	
 	// 对多关系
-	private List<Author> authors;
+	private List<Author> authors = new ArrayList<>(); // 避免调用getAuthors并进一步使用时NPE
 
 	public Long getId() {
 		return id;

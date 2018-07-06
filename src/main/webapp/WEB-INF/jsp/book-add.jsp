@@ -17,7 +17,7 @@
 </head>
 <body>
   <h1>添加图书</h1>
-  <form:form action="" method="post" commandName="book">
+  <form:form action="" method="post" commandName="bookForm">
     <div>
       <label for="title">书名</label>
       <form:input type="text" path="title" id="title" />
@@ -29,38 +29,38 @@
       <form:errors path="description" cssClass="field-error" />
     </div>   
     
-    <div>
-      <label for="authorId">作者</label>
-<!--       items指定用于生成选项的pojo列表 -->
-<!--       itemLabel指定作为option的显示文本的pojo属性 -->
-<!--       itemValue指定作为option的提交值的pojo属性 -->
-      <form:select path="authors[0].id" id="authorId" 
-                   items="${authorOptions}" 
-                   itemLabel="name" 
-                   itemValue="id">
-      </form:select>
+<!--     <div> -->
+<!--       <label for="authorId">作者</label> -->
+<!-- <!--       items指定用于生成选项的pojo列表 --> -->
+<!-- <!--       itemLabel指定作为option的显示文本的pojo属性 --> -->
+<!-- <!--       itemValue指定作为option的提交值的pojo属性 --> -->
+<%--       <form:select path="authors[0].id" id="authorId"  --%>
+<%--                    items="${authorOptions}"  --%>
+<%--                    itemLabel="name"  --%>
+<%--                    itemValue="id"> --%>
+<%--       </form:select> --%>
       
-      <form:select path="authors[1].id"
-                   items="${authorOptions}" 
-                   itemLabel="name" 
-                   itemValue="id">
-      </form:select>
+<%--       <form:select path="authors[1].id" --%>
+<%--                    items="${authorOptions}"  --%>
+<%--                    itemLabel="name"  --%>
+<%--                    itemValue="id"> --%>
+<%--       </form:select> --%>
 
-      <form:select path="authors[2].id" 
-                   items="${authorOptions}" 
-                   itemLabel="name" 
-                   itemValue="id">
-      </form:select>
-    </div> 
+<%--       <form:select path="authors[2].id"  --%>
+<%--                    items="${authorOptions}"  --%>
+<%--                    itemLabel="name"  --%>
+<%--                    itemValue="id"> --%>
+<%--       </form:select> --%>
+<!--     </div>  -->
 
     <div>
       <label for="publisherId">出版社</label>
-      <form:select path="publisher.id" id="publisherId"
+      <form:select path="publisherId" id="publisherId"
                    items="${publisherOptions}"
                    itemLabel="name"
                    itemValue="id">
       </form:select>
-      <form:errors path="publisher.id" cssClass="field-error" />
+      <form:errors path="publisherId" cssClass="field-error" />
     </div>   
     <div>
       <button type="submit">保存</button>
