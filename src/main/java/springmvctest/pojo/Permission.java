@@ -1,19 +1,14 @@
 package springmvctest.pojo;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Role {
-    private Long id;
+public class Permission {
+    private String id;
     private String name;
     private String description;
     
-    private List<Permission> permissions = new ArrayList<>(); // 对多关系
-    
-    public Long getId() {
+    public String getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getName() {
@@ -27,12 +22,5 @@ public class Role {
     }
     public void setDescription(String description) {
         this.description = description;
-    }
-    
-    public List<Permission> getPermissions() {
-        return permissions;
-    }
-    public void setPermissions(List<Permission> permissions) {
-        this.permissions = permissions;
     }
 }

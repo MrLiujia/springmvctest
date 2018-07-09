@@ -9,4 +9,14 @@
   <select id="findAllOptions" resultType="Role">
     select ID, NAME from ROLES
   </select>
+  
+  <insert id="create" useGeneratedKeys="true" keyColumn="ID" keyProperty="id">
+    insert into ROLES(NAME, DESCRIPTION) 
+    values(#{name}, #{description})
+  </insert>
+  
+  <insert id="addPermission">
+    insert into ROLE_PERMISSIONS(ROLE_ID, PERMISSION_ID) 
+    values(#{roleId}, #{permissionId})
+  </insert>
 </mapper>

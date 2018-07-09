@@ -47,3 +47,26 @@ jsp role-add.jsp
   权限      <form:select path>
 
 -------------------------------------------------------------
+
+create table PERMISSIONS(
+  ID varchar(64) primary key,
+  NAME varchar(64) not null,
+  DESCRIPTION varchar(128)
+);
+
+create table ROLE_PERMISSIONS(
+  ROLE_ID bigint not null,
+  PERMISSION_ID varchar(64) not null
+);
+
+-- 添加外键约束：
+-- ROLE_PERMISSIONS_FK_ROLE_ID_ROLES
+-- ROLE_PERMISSIONS_FK_PERMISSION_ID_PERMISSIONS
+
+insert into PERMISSIONS(ID, NAME) values
+  ('BOOK_RW', '图书读写'),
+  ('BOOK_RO', '图书只读'),
+  ('AUTHOR_RW', '作者读写'),
+  ('AUTHOR_RO', '作者只读'),
+  ('PUBLISHER_RW', '出版社读写'),
+  ('PUBLISHER_RO', '出版社只读');
