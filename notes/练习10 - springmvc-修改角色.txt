@@ -1,0 +1,40 @@
+实现功能【修改角色】
+
+控制器 RoleController
+  +String edit(@PathVariable Long id,
+               Model model)
+    映射 GET /roles/{id}/edit
+    调用 PermissionService.findAllOptions()，结果放入model
+    调用 RoleService.findOne(id)，结果放入model
+    返回 "role-edit"
+  +String update(@ModelAttribute @Valid RoleForm roleForm, 
+                 BindingResult bindingResult,
+                 Model model)
+    映射 POST /roles/{id}/edit
+    如果有校验错误
+      调用 PermissionService.findAllOptions()，结果放入model
+      返回 "role-edit"
+    否则
+      调用 RoleService.update(roleForm.toRole())
+      重定向到【角色列表】
+
+service RoleService
+  +Role findOne(Long id)
+    调用 RoleMapper.findOne(id)
+  +void update(Role role)
+    调用 RoleMapper.update(role) 更新角色名和描述
+    调用 RoleMapper.deleteAllPermissionsOfRole(role.getId()) 删除该角色的所有旧的权限关系
+    调用 RoleMapper.addPermission(role.getId(), 每个permission.getId()) 插入该角色的所有新的权限关系
+mapper RoleMapper
+  +Role findOne(Long id)
+  +void update(Role role)
+  +void deleteAllPermissionsOfRole(Long id)
+  +void addPermission(@Param("roleId") Long roleId, @Param("permissionId") String permissionId)
+mapper.xml RoleMapper.xml
+  <select id="findOne">
+  <update id="update">
+  <delete id="deleteAllPermissionsOfRole">
+  <insert id="addPermission">
+
+jsp role-add.jsp 改造成 role-edit.jsp
+  同时适用于添加和修改
