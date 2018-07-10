@@ -14,4 +14,35 @@
   <select id="usernameExists" resultType="boolean">
     select count(*) > 0 from OPERATORS where USERNAME = #{username}
   </select>
+  
+  <select id="findOneByUsername" resultMap="operatorDetails">
+    select 
+      o.ID OPERATOR_ID, o.USERNAME OPERATOR_USERNAME, o.PASSWORD OPERATOR_PASSWORD, o.DISABLED OPERATOR_DISABLED,
+      r.ID ROLE_ID, r.NAME ROLE_NAME, r.DESCRIPTION ROLE_DESCRIPTION,
+      p.ID PERMISSION_ID, p.NAME PERMISSION_NAME, p.DESCRIPTION PERMISSION_DESCRIPTION
+    from OPERATORS o
+      inner join ROLES r on o.ROLE_ID = r.ID
+      left join ROLE_PERMISSIONS rp on rp.ROLE_ID = r.ID
+      left join PERMISSIONS p on rp.PERMISSION_ID = p.ID
+    where o.USERNAME = #{username}
+  </select>
+  
+  <resultMap type="Operator" id="operatorDetails">
+    <id column="OPERATOR_ID" property="id" />
+    <result column="OPERATOR_USERNAME" property="username" />
+    <result column="OPERATOR_PASSWORD" property="password" />
+    <result column="OPERATOR_DISABLED" property="disabled" />
+    
+    <association property="role" javaType="Role">
+      <id column="ROLE_ID" property="id" />
+      <result column="ROLE_NAME" property="name" />
+      <result column="ROLE_DESCRIPTION" property="description" />
+      
+      <collection property="permissions" ofType="Permission">
+        <id column="PERMISSION_ID" property="id" />
+        <result column="PERMISSION_NAME" property="name" />
+        <result column="PERMISSION_DESCRIPTION" property="description" />
+      </collection>
+    </association>
+  </resultMap>
 </mapper>

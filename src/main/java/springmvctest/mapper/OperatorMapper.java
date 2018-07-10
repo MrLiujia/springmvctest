@@ -7,4 +7,6 @@ public interface OperatorMapper {
     void create(Operator operator);
 
     Boolean usernameExists(String username);
+    
+    Operator findOneByUsername(String username);
 }
