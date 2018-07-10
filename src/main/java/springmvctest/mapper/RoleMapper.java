@@ -15,4 +15,10 @@ public interface RoleMapper {
     void addPermission(@Param("roleId") Long roleId, 
                        @Param("permissionId") String permissionId);
 
+    Role findOne(Long id);
+
+    void update(Role role);
+
+    void deleteAllPermissionsOfRole(Long roleId);
+
 }

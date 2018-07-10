@@ -58,4 +58,17 @@ public class RoleForm {
         
         return role;
     }
+    public static RoleForm fromRole(Role role) {
+        RoleForm roleForm = new RoleForm();
+        roleForm.setId(role.getId());
+        roleForm.setName(role.getName());
+        roleForm.setDescription(role.getDescription());
+        
+        // 把角色实体的权限实体列表转换为表单对象的权限id列表
+        for (Permission permission : role.getPermissions()) {
+            roleForm.getPermissionIds().add(permission.getId());
+        }
+        
+        return roleForm;
+    }
 }

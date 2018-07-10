@@ -19,4 +19,36 @@
     insert into ROLE_PERMISSIONS(ROLE_ID, PERMISSION_ID) 
     values(#{roleId}, #{permissionId})
   </insert>
+  
+  <select id="findOne" resultMap="roleDetails">
+    select 
+      r.ID ROLE_ID, r.NAME ROLE_NAME, r.DESCRIPTION ROLE_DESCRIPTION, 
+      p.ID PERMISSION_ID, p.NAME PERMISSION_NAME, p.DESCRIPTION PERMISSION_DESCRIPTION
+    from ROLES r 
+      left join ROLE_PERMISSIONS rp on rp.ROLE_ID = r.ID
+      left join PERMISSIONS p on rp.PERMISSION_ID = p.ID
+    where r.ID = #{id}
+  </select>
+  
+  <resultMap type="Role" id="roleDetails">
+    <id column="ROLE_ID" property="id" />
+    <result column="ROLE_NAME" property="name" />
+    <result column="ROLE_DESCRIPTION" property="description" />
+    
+    <collection property="permissions" ofType="Permission">
+      <id column="PERMISSION_ID" property="id"/>
+      <result column="PERMISSION_NAME" property="name" />
+      <result column="PERMISSION_DESCRIPTION" property="description" />
+    </collection>
+  </resultMap>
+  
+  <update id="update">
+    update ROLES
+    set NAME = #{name}, DESCRIPTION = #{description}
+    where ID = #{id}
+  </update>
+  
+  <delete id="deleteAllPermissionsOfRole">
+    delete from ROLE_PERMISSIONS where ROLE_ID = #{roleId}
+  </delete>
 </mapper>
