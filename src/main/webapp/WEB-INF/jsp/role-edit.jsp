@@ -4,11 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>      
     
+<c:set var="title" value="${roleForm.id == null ? '添加角色' : '修改角色'}" />    
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>修改角色</title>
+<title>${title}</title>
 
   <style type="text/css">
    .field-error {
@@ -17,7 +19,7 @@
   </style>
 </head>
 <body>
-  <h1>修改角色</h1>
+  <h1>${title}</h1>
 <!--    action为空意味着会提交到当前表单页面的路径 -->
   <form:form action="" method="post" commandName="roleForm">
     <div>

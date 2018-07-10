@@ -36,7 +36,7 @@ public class RoleController {
     public String add(@ModelAttribute RoleForm roleForm, 
                       Model model) {
         prepareOptionsInAdd(model);
-        return "role-add";
+        return "role-edit";
     }
     
     private void prepareOptionsInAdd(Model model) {
@@ -50,7 +50,7 @@ public class RoleController {
                          Model model) {
         if (bindingResult.hasErrors()) {
             prepareOptionsInAdd(model);
-            return "role-add";
+            return "role-edit";
         }
         
         roleService.create(roleForm.toRole());
