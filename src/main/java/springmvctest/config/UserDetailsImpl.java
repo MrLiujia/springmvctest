@@ -17,12 +17,16 @@ public class UserDetailsImpl implements UserDetails {
     private List<GrantedAuthority> authorities;
     private boolean enabled;
     
+    private Operator operator;
+    
     public UserDetailsImpl(Operator operator) {
         this.username = operator.getUsername();
         this.password = operator.getPassword();
         this.authorities = buildAuthorities(operator);
         // 若该管理员未指定禁用标志则默认启用
         this.enabled = operator.getDisabled() == null ? true : !operator.getDisabled();
+        
+        this.operator = operator;
     }
 
     private List<GrantedAuthority> buildAuthorities(Operator operator) {
@@ -57,6 +61,11 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() { // 账号启用了吗
         return enabled;
     }
+    
+    public Operator getOperator() {
+        return operator;
+    }
+    
 
     @Override
     public boolean isAccountNonExpired() { // 账号没有过期吗

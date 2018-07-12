@@ -42,6 +42,13 @@
     <div style="display: inline-block;">
 <!--                                principal属性可以拿到当前登录的用户详情（UserDetailsImpl） -->
       <sec:authentication property="principal.username" />
+      
+      <!-- 先把当前登录用户的email存入页面域变量operatorEmail -->
+      <sec:authentication property="principal.operator.email" var="operatorEmail" />
+      
+      <c:if test="${operatorEmail != null}">
+        [${operatorEmail}]
+      </c:if>
     </div> 
   </div>
   

@@ -17,7 +17,8 @@
   
   <select id="findOneByUsername" resultMap="operatorDetails">
     select 
-      o.ID OPERATOR_ID, o.USERNAME OPERATOR_USERNAME, o.PASSWORD OPERATOR_PASSWORD, o.DISABLED OPERATOR_DISABLED,
+      o.ID OPERATOR_ID, o.USERNAME OPERATOR_USERNAME, o.PASSWORD OPERATOR_PASSWORD, o.DISABLED OPERATOR_DISABLED, 
+        o.EMAIL OPERATOR_EMAIL,
       r.ID ROLE_ID, r.NAME ROLE_NAME, r.DESCRIPTION ROLE_DESCRIPTION,
       p.ID PERMISSION_ID, p.NAME PERMISSION_NAME, p.DESCRIPTION PERMISSION_DESCRIPTION
     from OPERATORS o
@@ -32,6 +33,7 @@
     <result column="OPERATOR_USERNAME" property="username" />
     <result column="OPERATOR_PASSWORD" property="password" />
     <result column="OPERATOR_DISABLED" property="disabled" />
+    <result column="OPERATOR_EMAIL" property="email" />
     
     <association property="role" javaType="Role">
       <id column="ROLE_ID" property="id" />

@@ -14,6 +14,8 @@ public class Operator {
 	private Role role; // 对一关系
 	
 	private Boolean disabled;
+	
+	private String email; // alter table OPERATORS add column EMAIL varchar(128)
 
 	public Operator() {
 	}
@@ -58,7 +60,15 @@ public class Operator {
 		this.disabled = disabled;
 	}
 
-	@Override
+	public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
 	public String toString() {
 		return "Operator [id=" + id + ", username=" + username + ", password="
 				+ password + ", role=" + role + ", disabled=" + disabled + "]";
