@@ -26,14 +26,14 @@ public class AuthorController {
 		this.authorService = authorService;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/authors/author-list")
+	@RequestMapping(method = RequestMethod.GET, value = "/authors/")
 	public String list(Model model) {
 		List<Author> authors = authorService.findAll();
 		model.addAttribute("authors", authors);
 		return "author-list";
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/authors/author-details/{id}")
+	@RequestMapping(method = RequestMethod.GET, value = "/authors/{id}")
 	public String details(@PathVariable Long id, Model model) {
 	    Author author = authorService.findOne(id);
 	    model.addAttribute("author", author);
@@ -56,7 +56,7 @@ public class AuthorController {
 	    
 	    // 数据校验通过才能走service
         authorService.create(author);
-        return "redirect:/authors/author-list";
+        return "redirect:/authors/";
     }
 	
     @RequestMapping(method = RequestMethod.GET, value = "/authors/{id}/edit")
@@ -74,6 +74,6 @@ public class AuthorController {
         }
         
         authorService.update(author);
-        return "redirect:/authors/author-list";
+        return "redirect:/authors/";
     }
 }

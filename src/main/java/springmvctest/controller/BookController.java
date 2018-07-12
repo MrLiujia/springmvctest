@@ -39,7 +39,7 @@ public class BookController {
         this.publisherService = publisherService;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/books/book-list")
+    @RequestMapping(method = RequestMethod.GET, value = "/books/")
 	public String list(Model model) {
 		System.out.println("BookController.list");
 		// 调用service获取图书列表
@@ -48,7 +48,7 @@ public class BookController {
 		return "book-list";
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/books/book-details/{id}")
+	@RequestMapping(method = RequestMethod.GET, value = "/books/{id}")
 	public String details(@PathVariable Long id, Model model) {
 	    Book book = bookService.findOne(id);
 	    model.addAttribute("book", book);
@@ -83,6 +83,6 @@ public class BookController {
 	    System.out.println("publisher: #" + bookForm.getPublisherId());
 	    
 	    bookService.create(bookForm.toBook());
-	    return "redirect:/books/book-list";
+	    return "redirect:/books/";
 	}
 }

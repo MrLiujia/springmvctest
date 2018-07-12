@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>作者详情</title>
-</head>
-<body>
-  <h1>作者详情</h1>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+
+<!-- 调用布局，内容将插入布局的content区域 -->
+<t:layout title="作者详情">
   <div>
     <h2>${author.name}</h2>
     <div>
@@ -25,6 +20,5 @@
         </ul>
       </div>
     </div>
-  </div>
-</body>
-</html>
+  </div>  
+</t:layout>
