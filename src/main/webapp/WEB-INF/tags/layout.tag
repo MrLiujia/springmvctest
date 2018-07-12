@@ -23,21 +23,43 @@
 </head>
 <body>
   <div class="header">
-    <ul class="menu">
-      <li>图书管理</li>
-      <li><a href="${contextPath}/books/">图书列表</a></li>
-      <li><a href="${contextPath}/books/add">添加图书</a></li>
-    </ul>
-    <ul class="menu">
-      <li>作者管理</li>
-      <li><a href="${contextPath}/authors/">作者列表</a></li>
-      <li><a href="${contextPath}/authors/add">添加作者</a></li>
-    </ul>    
-    <ul class="menu">
-      <li>出版社管理</li>
-      <li><a href="${contextPath}/publishers/">出版社列表</a></li>
-      <li><a href="${contextPath}/publishers/add">添加出版社</a></li>
-    </ul>   
+    <sec:authorize access="hasAnyAuthority('PERM_BOOK_RO', 'PERM_BOOK_RW')">
+      <ul class="menu">
+        <li>图书管理</li>
+        <sec:authorize access="hasAnyAuthority('PERM_BOOK_RO', 'PERM_BOOK_RW')">
+          <li><a href="${contextPath}/books/">图书列表</a></li>
+        </sec:authorize>
+        
+        <sec:authorize access="hasAuthority('PERM_BOOK_RW')">
+          <li><a href="${contextPath}/books/add">添加图书</a></li>
+        </sec:authorize>
+      </ul>
+    </sec:authorize>
+    
+    <sec:authorize access="hasAnyAuthority('PERM_AUTHOR_RO', 'PERM_AUTHOR_RW')">
+      <ul class="menu">
+        <li>作者管理</li>
+        <sec:authorize access="hasAnyAuthority('PERM_AUTHOR_RO', 'PERM_AUTHOR_RW')">
+          <li><a href="${contextPath}/authors/">作者列表</a></li>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('PERM_AUTHOR_RW')">
+          <li><a href="${contextPath}/authors/add">添加作者</a></li>
+        </sec:authorize>
+      </ul>  
+    </sec:authorize>
+   
+   <sec:authorize access="hasAnyAuthority('PERM_PUBLISHER_RO', 'PERM_PUBLISHER_RW')">
+      <ul class="menu">
+        <li>出版社管理</li>
+        <sec:authorize access="hasAnyAuthority('PERM_PUBLISHER_RO', 'PERM_PUBLISHER_RW')">
+          <li><a href="${contextPath}/publishers/">出版社列表</a></li>
+        </sec:authorize>
+        
+        <sec:authorize access="hasAuthority('PERM_PUBLISHER_RW')">
+          <li><a href="${contextPath}/publishers/add">添加出版社</a></li>
+        </sec:authorize>
+      </ul>    
+   </sec:authorize>
     
     <div style="display: inline-block;">
 <!--                                principal属性可以拿到当前登录的用户详情（UserDetailsImpl） -->
