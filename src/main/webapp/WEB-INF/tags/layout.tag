@@ -4,6 +4,7 @@
 <%@ attribute name="title" required="true" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -36,7 +37,12 @@
       <li>出版社管理</li>
       <li><a href="${contextPath}/publishers/">出版社列表</a></li>
       <li><a href="${contextPath}/publishers/add">添加出版社</a></li>
-    </ul>    
+    </ul>   
+    
+    <div style="display: inline-block;">
+<!--                                principal属性可以拿到当前登录的用户详情（UserDetailsImpl） -->
+      <sec:authentication property="principal.username" />
+    </div> 
   </div>
   
   <div class="content">
