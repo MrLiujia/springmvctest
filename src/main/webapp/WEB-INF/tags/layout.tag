@@ -49,6 +49,12 @@
       <c:if test="${operatorEmail != null}">
         [${operatorEmail}]
       </c:if>
+      
+      <!-- springsecurity默认的退出路径是：POST /logout，注意：springsecurity自带处理 -->
+      <form action="${contextPath}/logout" method="post" style="display: inline;">
+        <sec:csrfInput />
+        <button type="submit">退出</button>
+      </form>
     </div> 
   </div>
   

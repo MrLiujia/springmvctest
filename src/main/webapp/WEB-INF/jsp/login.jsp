@@ -17,6 +17,11 @@
       <h2 style="color: red;">用户名或密码错误</h2>
   </c:if>
   
+  <!-- 当退出后来到登录页面时，显示该消息 -->
+  <c:if test="${param.logout != null}">
+    <h2>已退出，请重新登录</h2>
+  </c:if>
+  
 <!--   springsecurity默认的字段名： -->
 <!--   用户名    username -->
 <!--   密码        password -->
