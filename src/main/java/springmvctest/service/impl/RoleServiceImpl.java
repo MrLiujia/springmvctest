@@ -3,9 +3,12 @@ package springmvctest.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import springmvctest.config.UserDetailsImpl;
 import springmvctest.mapper.RoleMapper;
 import springmvctest.pojo.Permission;
 import springmvctest.pojo.Role;
@@ -16,9 +19,13 @@ import springmvctest.service.RoleService;
 public class RoleServiceImpl implements RoleService {
     private RoleMapper roleMapper;
     
+    private SessionRegistry sessionRegistry;
+    
     @Autowired
-    public RoleServiceImpl(RoleMapper roleMapper) {
+    public RoleServiceImpl(RoleMapper roleMapper,
+                           SessionRegistry sessionRegistry) {
         this.roleMapper = roleMapper;
+        this.sessionRegistry = sessionRegistry;
     }
 
     @Override
@@ -58,6 +65,23 @@ public class RoleServiceImpl implements RoleService {
         // 再把新关系插入中间表
         for (Permission permission : role.getPermissions()) {
             roleMapper.addPermission(role.getId(), permission.getId());
+        }
+        
+        // 将该角色的所有已登录用户退出
+        logoutOperatorsOfRole(role);
+    }
+
+    private void logoutOperatorsOfRole(Role role) {
+        List<Object> allLoginedPrincipals = sessionRegistry.getAllPrincipals();
+        for (Object principal : allLoginedPrincipals) { // 遍历每一个已登录用户
+            UserDetailsImpl userDetails = (UserDetailsImpl) principal;
+            if (userDetails.getOperator().getRole().getId() == role.getId()) { // 该用户的角色已经被修改（权限可能被修改）
+                List<SessionInformation> sessions = sessionRegistry.getAllSessions(principal, false);
+                // 保守起见，将该用户的所有登录退出
+                for (SessionInformation session : sessions) {
+                    session.expireNow(); // 使会话失效
+                }
+            }
         }
     }
 
