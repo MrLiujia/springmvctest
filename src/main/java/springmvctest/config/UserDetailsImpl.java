@@ -1,35 +1,34 @@
 package springmvctest.config;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
+import org.springframework.security.core.userdetails.User;
 import springmvctest.pojo.Operator;
 import springmvctest.pojo.Permission;
 
-public class UserDetailsImpl implements UserDetails {
-    private String username;
-    private String password;
-    private List<GrantedAuthority> authorities;
-    private boolean enabled;
-    
+/**
+ * 继承springsecurity提供的User类获得了UserDetails的基本实现，
+ * 如username、password、authorities、enabled等字段及其getter；
+ * 还有继承的equals和hashCode会根据username判断两个UserDetailsImpl是否相等，
+ * 用于SessionRegistry中维护同一个用户名多次登录导致多个会话的情况
+ */
+public class UserDetailsImpl extends User {
     private Operator operator;
     
     public UserDetailsImpl(Operator operator) {
-        this.username = operator.getUsername();
-        this.password = operator.getPassword();
-        this.authorities = buildAuthorities(operator);
-        // 若该管理员未指定禁用标志则默认启用
-        this.enabled = operator.getDisabled() == null ? true : !operator.getDisabled();
-        
+        super(operator.getUsername(), 
+              operator.getPassword(), 
+              operator.getDisabled() == null ? true : !operator.getDisabled(), 
+              true, true, true, 
+              buildAuthorities(operator));
+                
         this.operator = operator;
     }
-
-    private List<GrantedAuthority> buildAuthorities(Operator operator) {
+    
+    private static List<GrantedAuthority> buildAuthorities(Operator operator) {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + operator.getRole().getName()));
         
@@ -45,41 +44,8 @@ public class UserDetailsImpl implements UserDetails {
         return authorities;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
-    }
-    @Override
-    public String getPassword() {
-        return password;
-    }
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-    @Override
-    public boolean isEnabled() { // 账号启用了吗
-        return enabled;
-    }
-    
     public Operator getOperator() {
         return operator;
     }
     
-
-    @Override
-    public boolean isAccountNonExpired() { // 账号没有过期吗
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() { // 账号没有锁定吗
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() { // 密码没有过期吗
-        return true;
-    }
-
 }

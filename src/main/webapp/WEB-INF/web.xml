@@ -10,6 +10,13 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
 
+  <!-- 在会话创建或者销毁的时候通知springsecurity，以维护SessionRegistry -->
+  <listener>
+    <listener-class>
+      org.springframework.security.web.session.HttpSessionEventPublisher
+    </listener-class>
+  </listener>
+
   <servlet>
     <servlet-name>dispatcherServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
